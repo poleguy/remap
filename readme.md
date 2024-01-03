@@ -4,9 +4,27 @@
 
 This little script is a bit hacky, but it works nicely.
 
+## What is this?
+
+This is a macro keyboard for linux. It provides 21 completely configurable buttons. Each button can trigger a script that can run any action conceivable.
+
+I use this to do things like open specific applications like python or vscode, or bring Microsoft Teams to the foreground immediately when you've lost it. Adjust your volume up and down. Mute/unmute. Have your computer say things. Switch scenes on OBS. It won't type garbage characters into your terminal, or cause you to lose your cursor focus unintentionally, or conflict with hotkey settings in the app you are using.
+
+You can think of it as the dorky linux version of the Elgato Stream Deck MK.2
+
+https://www.amazon.com/Elgato-Stream-Deck-MK-2-Controller/dp/B09738CV2G/
+
+But with 40% more buttons and 10% of the price.
+
+
+
 ## Prerequisites:
 
-you'll need python3 installed.
+You'll need the hardware:
+
+https://www.amazon.com/Mechanical-Numeric-Backlit-Desktop-Computer/dp/B07FFLNF5C/
+
+You'll need python3 installed.
 
 To talk to the keyboard and do the obs magic:
 
