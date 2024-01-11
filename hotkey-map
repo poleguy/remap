@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+# this is a separate script so that you don't need to restart remap.py to change it on the fly
+
+import subprocess
+import typer
+# https://python-evdev.readthedocs.io/en/latest/tutorial.html
+
+def main(keycode):
+    if keycode == 'KEY_ESC':
+        print("Hello, world! ESC")
+        subprocess.Popen("/home/poleguy/.local/bin/hotkey-teams")
+    if keycode == 'KEY_CALC':
+        print("Hello, world!")
+        subprocess.Popen("/home/poleguy/.local/bin/hotkey-python3")
+    if keycode == 'KEY_TAB':
+        subprocess.Popen("/home/poleguy/.local/bin/hotkey-obs")
+        
+    if keycode == 'KEY_EQUAL':
+        subprocess.Popen("/home/poleguy/.local/bin/hotkey-vscode")
+        
+    if keycode == 'KEY_KPSLASH':
+        print("Hello, world!")
+        
+    if keycode == 'KEY_KPASTERISK':
+        print("Hello, world!")
+        
+    if keycode == 'KEY_BACKSPACE':
+        print("Hello, world!")
+        
+    if keycode == 'KEY_KP1':
+        print("Hello, world!1")
+        subprocess.Popen('/usr/local/bin/obs-cli -p 7D4xNRVVAkE3sHhu -P 4455 -H 192.168.1.162 scene switch "Scope"', shell=True)
+    
+    if keycode == 'KEY_KP2':
+        print("Hello, world!2")
+        subprocess.Popen('/usr/local/bin/obs-cli -p 7D4xNRVVAkE3sHhu -P 4455 -H 192.168.1.162 scene switch "Share ViewSonic"', shell=True)
+    
+    if keycode == 'KEY_KP3':
+        print("Hello, world!3")
+        subprocess.Popen('/usr/local/bin/obs-cli -p 7D4xNRVVAkE3sHhu -P 4455 -H 192.168.1.162 scene switch "Soldering"', shell=True)
+    
+        
+    if keycode == 'KEY_KP4':
+        print("Hello, world!4")
+    
+    if keycode == 'KEY_KP5':
+        print("Hello, world!5")
+        
+    if keycode == 'KEY_KP6':
+        print("Hello, world!6")
+        
+    if keycode == 'KEY_KP7':
+        subprocess.Popen("amixer set 'Front-Panel',0 nocap; amixer set 'Rear-Panel',0 nocap", shell=True)
+        
+    if keycode == 'KEY_KP8':
+        subprocess.Popen("amixer set 'Front-Panel',0 cap; amixer set 'Rear-Panel',0 cap", shell=True)
+        
+    if keycode == 'KEY_KP9':
+        print("Hello, world!9")
+        
+    if keycode == 'KEY_KP0':
+        print("Hello, world 0!")
+        subprocess.Popen('/usr/local/bin/obs-cli -p 7D4xNRVVAkE3sHhu -P 4455 -H 192.168.1.162 scene switch "Tele"', shell=True)
+        
+    if keycode == 'KEY_KPDOT':
+        print("Hello, world!")
+        subprocess.Popen('/usr/local/bin/obs-cli -p 7D4xNRVVAkE3sHhu -P 4455 -H 192.168.1.162 scene switch "Tele and Scope"', shell=True)
+    
+        
+    if keycode == 'KEY_KPMINUS':
+        subprocess.Popen("amixer set Front 3dB-", shell=True)
+        
+    if keycode == 'KEY_KPPLUS':
+        subprocess.Popen("amixer set Front 1.5dB+", shell=True)
+        
+    if keycode == 'KEY_KPENTER':                            
+        subprocess.Popen('espeak "We are closer than we\'ve ever been before"', shell=True)
+
+
+
+if __name__ == "__main__":
+    typer.run(main)

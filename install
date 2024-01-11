@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# https://stackoverflow.com/questions/74283337/how-to-link-a-selected-set-of-files-from-one-directory-to-another-in-linux
+
+for file in hotkey-*
+do
+    echo ln -s "${file}" /targetdir/${file}
+done
