@@ -2,9 +2,23 @@
 # keyed to super-0
 set -e
 
-# if python-fire window is open, switch to it
+WINDOW_STR="VSCodium"
+
+# if window is open but not active, switch to it.
+# otherwise minimize it
 # https://superuser.com/questions/142945/bash-command-to-focus-a-specific-window
-wmctrl -a "VSCodium" && true
+#https://askubuntu.com/questions/4876/can-i-minimize-a-window-from-the-command-line
+
+NAME=$(xdotool getwindowfocus getwindowname)
+
+# look for substring match
+if [[ "$NAME" == *"$WINDOW_STR"* ]]; then
+    wmctrl -a $WINDOW_STR -b add,hidden && true
+    #espeak "hiding"
+else
+    wmctrl -a $WINDOW_STR && true
+    #espeak "restoring"
+fi
 RC=$?
 
 # https://stackoverflow.com/questions/26675681/how-to-check-the-exit-status-using-an-if-statement
