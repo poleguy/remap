@@ -49,7 +49,7 @@ Put the hotkey scripts in place.
 Use these as examples to suit your needs. They generally run an app if it isn't running, or bring it in focus if it already is.
 
 ```
-cp hotkey-* ~/.local/bin
+./install
 ```
 
 Next, identify the correct usb device:

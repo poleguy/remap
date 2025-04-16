@@ -1,74 +1,131 @@
 #!/usr/bin/env python3
 # this is a separate script so that you don't need to restart remap.py to change it on the fly
 
+# ln -s /home/poleguy/flippy-data/2023/remap/
+
 import subprocess
-import typer
+import os
+import time
+
 # https://python-evdev.readthedocs.io/en/latest/tutorial.html
 
 def main(keycode):
+
+    OBS_WEBSOCKET_PASSWORD = "mrnSTlSSX1xl5aBD"
+    
     if keycode == 'KEY_ESC':
-        print("Hello, world! ESC")
-        subprocess.Popen("/home/poleguy/.local/bin/hotkey-teams")
+        #subprocess.Popen('espeak "Undefined. Press slash to edit"', shell=True)
+        #subprocess.Popen("nohup /home/poleguy/.local/bin/hotkey-teams &", shell=True)
+        #subprocess.Popen("nohup /home/poleguy/.local/bin/hotkey-teams &", shell=True, preexec_fn=os.setpgrp)
+        #subprocess.Popen("/usr/bin/nohup /home/poleguy/.local/bin/hotkey-teams", preexec_fn=os.setpgrp)
+        #subprocess.Popen("/home/poleguy/.local/bin/hotkey-teams", preexec_fn=os.setpgrp)
+        #subprocess.Popen("/home/poleguy/.local/bin/hotkey-teams", preexec_fn=None)
+        #spawn_daemon(lambda: subprocess.Popen("nohup /home/poleguy/.local/bin/hotkey-teams", shell=True, preexec_fn=os.setpgrp))
+        #subprocess.run("/usr/bin/nohup /usr/bin/bash -c '/usr/bin/nohup /home/poleguy/.local/bin/hotkey-teams'", shell=True)
+        #subprocess.Popen("/usr/bin/bash -c '/usr/bin/nohup /home/poleguy/.local/bin/hotkey-teams'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, preexec_fn=lambda: None)
+        #subprocess.Popen("/home/poleguy/.local/bin/hotkey-teams", shell=True, preexec_fn=lambda: os.setsid, preexec_fn=os.setpgrp)    
+        #creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
+
+        #subprocess.Popen("/usr/bin/bash -c '/usr/bin/nohup /home/poleguy/.local/bin/hotkey-teams'")
+        #subprocess.Popen("/usr/bin/bash -c 'at now /usr/bin/nohup /home/poleguy/.local/bin/hotkey-teams'", shell=True)
+
+        #with open('/tmp/stderr.txt', 'w') as f:
+        #subprocess.Popen("/usr/bin/bash -c '/usr/bin/nohup /home/poleguy/.local/bin/hotkey-teams& disown'", stdout=None,stderr=None, shell=True)
+        #subprocess.Popen("/usr/bin/bash -c '/usr/bin/nohup /home/poleguy/.local/bin/hotkey-teams& disown'", stdout=None,stderr=None, shell=True, preexec_fn=None)
+        #subprocess.Popen("/usr/bin/nohup /home/poleguy/.local/bin/hotkey-teams& disown'", stdout=None,stderr=None, shell=True, preexec_fn=None)
+        #subprocess.Popen("/usr/bin/nohup /home/poleguy/.local/bin/hotkey-teams& disown'", stdout=None,stderr=None, shell=True, preexec_fn=None)
+        #os.popen("/home/poleguy/.local/bin/hotkey-teams")
+        #os.popen("/home/poleguy/.local/bin/hotkey-teams")
+        #subprocess.Popen("python3 /home/poleguy/flippy-data/2023/remap/blah.py", shell=True)
+
+
+        #subprocess.Popen("systemd-run --user --scope emacs /tmp/saoeusaothu", shell=True) # wow! worked!
+        #subprocess.Popen("systemd-run --user --scope /home/poleguy/.local/bin/hotkey-teams", shell=True) # wow! worked!
+        bash_detached("/home/poleguy/.local/bin/hotkey-teams")
+        
+        
+        #        https://stackoverflow.com/questions/32208782/cant-detach-child-process-when-main-process-is-started-from-systemd
+
+        
+        #https://superuser.com/questions/178587/how-do-i-detach-a-process-from-terminal-entirely/178592#178592
+        # https://stackoverflow.com/questions/71439704/how-to-start-another-program-and-keep-it-running-after-python-script-finishes
+        # https://stackoverflow.com/questions/13592219/launch-a-totally-independent-process-from-python
+        # https://stackoverflow.com/questions/11585168/launch-an-independent-process-with-python
+        #https://stackoverflow.com/questions/11585168/launch-an-independent-process-with-python
+        # https://stackoverflow.com/questions/75592650/start-a-process-from-a-systemd-service-that-wont-be-killed-when-the-service-is
+
+        time.sleep(2)                        
+        #subprocess.Popen('espeak "ack ack ack"', shell=True)
+        
     if keycode == 'KEY_CALC':
         print("Hello, world!")
         subprocess.Popen("/home/poleguy/.local/bin/hotkey-python3")
     if keycode == 'KEY_TAB':
         subprocess.Popen("/home/poleguy/.local/bin/hotkey-obs")
-        
     if keycode == 'KEY_EQUAL':
         subprocess.Popen("/home/poleguy/.local/bin/hotkey-vscode")
-        
     if keycode == 'KEY_KPSLASH':
-        print("Hello, world!")
-        
+        subprocess.Popen("emacs /home/poleguy/flippy-data/2023/remap/hotkey-map", shell=True)        
     if keycode == 'KEY_KPASTERISK':
-        print("Hello, world!")
-        
+        subprocess.Popen('pavucontrol', shell=True)
     if keycode == 'KEY_BACKSPACE':
-        print("Hello, world!")
-        
-    if keycode == 'KEY_KP1':
-        print("Hello, world!1")
-        subprocess.Popen('/usr/local/bin/obs-cli -p 7D4xNRVVAkE3sHhu -P 4455 -H 192.168.1.162 scene switch "Scope"', shell=True)
-    
-    if keycode == 'KEY_KP2':
-        print("Hello, world!2")
-        subprocess.Popen('/usr/local/bin/obs-cli -p 7D4xNRVVAkE3sHhu -P 4455 -H 192.168.1.162 scene switch "Share ViewSonic"', shell=True)
-    
-    if keycode == 'KEY_KP3':
-        print("Hello, world!3")
-        subprocess.Popen('/usr/local/bin/obs-cli -p 7D4xNRVVAkE3sHhu -P 4455 -H 192.168.1.162 scene switch "Soldering"', shell=True)
-    
-        
-    if keycode == 'KEY_KP4':
-        print("Hello, world!4")
-    
-    if keycode == 'KEY_KP5':
-        print("Hello, world!5")
-        
-    if keycode == 'KEY_KP6':
-        print("Hello, world!6")
-        
-    if keycode == 'KEY_KP7':
-        subprocess.Popen("amixer set 'Front-Panel',0 nocap; amixer set 'Rear-Panel',0 nocap", shell=True)
-        
-    if keycode == 'KEY_KP8':
-        subprocess.Popen("amixer set 'Front-Panel',0 cap; amixer set 'Rear-Panel',0 cap", shell=True)
-        
-    if keycode == 'KEY_KP9':
-        print("Hello, world!9")
-        
-    if keycode == 'KEY_KP0':
-        print("Hello, world 0!")
-        subprocess.Popen('/usr/local/bin/obs-cli -p 7D4xNRVVAkE3sHhu -P 4455 -H 192.168.1.162 scene switch "Tele"', shell=True)
-        
+        subprocess.Popen('espeak "Undefined. Press slash to edit"', shell=True)
+        with open('/tmp/stderr.txt', 'w') as f:
+            subprocess.Popen('XDG_RUNTIME_DIR=/run/user/1000 espeak "help" > /tmp/stdout.txt', stderr=f, shell=True)
     if keycode == 'KEY_KPDOT':
-        print("Hello, world!")
-        subprocess.Popen('/usr/local/bin/obs-cli -p 7D4xNRVVAkE3sHhu -P 4455 -H 192.168.1.162 scene switch "Tele and Scope"', shell=True)
-    
+        subprocess.Popen(f'obs-cli -p {OBS_WEBSOCKET_PASSWORD} -P 4455 -H 192.168.1.162 scene switch "Zoom and Tablet"', shell=True, env=os.environ)
+    if keycode == 'KEY_KP0':
+        subprocess.Popen(f'obs-cli -p {OBS_WEBSOCKET_PASSWORD} -P 4455 -H 192.168.1.162 scene switch "Tele"', shell=True, env=os.environ)
+    if keycode == 'KEY_KP1':
+        subprocess.Popen(f'obs-cli -p {OBS_WEBSOCKET_PASSWORD} -P 4455 -H 192.168.1.162 scene switch "Zoom"', shell=True, env=os.environ)
+    if keycode == 'KEY_KP2':
+        subprocess.Popen(f'obs-cli -p {OBS_WEBSOCKET_PASSWORD} -P 4455 -H 192.168.1.162 scene switch "Share Left"', shell=True, env=os.environ)
+    if keycode == 'KEY_KP3':
+        subprocess.Popen(f'obs-cli -p {OBS_WEBSOCKET_PASSWORD} -P 4455 -H 192.168.1.162 scene switch "Soldering"', shell=True, env=os.environ)
+    if keycode == 'KEY_KP4':
+        subprocess.Popen(f'obs-cli -p {OBS_WEBSOCKET_PASSWORD} -P 4455 -H 192.168.1.162 scene switch "Share Tablet"', shell=True, env=os.environ)
+    if keycode == 'KEY_KP5':
+        subprocess.Popen('xdg-open /home/poleguy/fpga-data/2024/nullboard/nullboard.html', shell=True)
+    if keycode == 'KEY_KP6':
+        #subprocess.Popen('xinput --map-to-output "Tablet Monitor Pen Pen (0)" DP-3', shell=True)
+        subprocess.Popen('env > /tmp/blah.txt', shell=True)
+        pass
+    if keycode == 'KEY_KP7':
+        # mute
+        #subprocess.Popen("amixer set 'Front-Panel',0 nocap; amixer set 'Rear-Panel',0 nocap", shell=True)
+        #subprocess.Popen("amixer set 'Front-Panel',0 nocap; amixer set 'Rear-Panel',0 nocap", shell=True)
+        # mute teams    
+        subprocess.Popen("/home/poleguy/.local/bin/hotkey-teams-toggle-mute")
+    if keycode == 'KEY_KP8':
+        subprocess.Popen(f'obs-cli -p {OBS_WEBSOCKET_PASSWORD} -P 4455 -H 192.168.1.162 filter toggle teleprompter Freeze', shell=True, env=os.environ)
+
+    if keycode == 'KEY_KP9':
+        #subprocess.Popen('espeak "Undefined. Press slash to edit"', shell=True)
+        #subprocess.Popen('xrandr --output HDMI-0 --mode 3840x2160 --pos 2560x2 --rate 59.94 --off; sleep 8; xrandr --output HDMI-0 --mode 3840x2160 --pos 2560x0 --rate 60.00 --auto', shell=True)
+        #subprocess.Popen('xrandr --output HDMI-0 --mode 2560x1440 --pos 2560x0 --rate 60.00 --auto', shell=True)
+        #subprocess.Popen('xrandr --output HDMI-0 --off', shell=True)
+
+        #time.sleep(4)
+        #subprocess.Popen('xrandr --output HDMI-0 --mode 3840x2160 --pos 2560x0 --rate 60.00 --auto', shell=True)
+        subprocess.Popen('xrandr --output HDMI-0 --mode 2560x1440 --pos 2560x0 --rate 60.00', shell=True)
+        time.sleep(16)
+        subprocess.Popen('xrandr --output HDMI-0 --mode 3840x2160 --pos 2560x0 --rate 60.00', shell=True)
+
         
+        # try to reset black screen as well
+        subprocess.Popen('obs-cli -p mrnSTlSSX1xl5aBD -P 4455 -H 192.168.1.162 input set teleprompter  "Exposure Time, Absolute" 750', shell=True)
+        
+        # fix tablet:
+        
+        subprocess.Popen('xinput --map-to-output "Tablet Monitor Pen stylus" DP-3', shell=True)
+
+        # move stuff off of tablet, except Krita
+        subprocess.Popen('python3 /home/poleguy/flippy-data/sweep/move_windows/move_windows.py', shell=True)
+        #subprocess.Popen('espeak "b"', shell=True)
+
     if keycode == 'KEY_KPMINUS':
         subprocess.Popen("amixer set Front 3dB-", shell=True)
+        subprocess.Popen('python3 /home/poleguy/flippy-data/sweep/move_windows/move_windows.py', shell=True)
         
     if keycode == 'KEY_KPPLUS':
         subprocess.Popen("amixer set Front 1.5dB+", shell=True)
@@ -77,6 +134,12 @@ def main(keycode):
         subprocess.Popen('espeak "We are closer than we\'ve ever been before"', shell=True)
 
 
+# https://stackoverflow.com/questions/6011235/run-a-program-from-python-and-have-it-continue-to-run-after-the-script-is-kille/60514518#60514518
+# didn't work: def spawn_daemon(func):
+
+def bash_detached(cmd):
+    subprocess.Popen(f"systemd-run --user --scope {cmd}", shell=True)
 
 if __name__ == "__main__":
+    import typer
     typer.run(main)

@@ -26,7 +26,7 @@ with dev.grab_context():
                     key = evdev.categorize(event)
                     if key.keystate == key.key_down:
                         print(key.keycode)
-                        subprocess.Popen(f'hotkey-map {key.keycode}', shell=True)
+                        subprocess.Popen(f'./hotkey-map {key.keycode}', shell=True)
 
         
         for device in dev, dev2:

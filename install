@@ -3,5 +3,7 @@
 
 for file in hotkey-*
 do
-    echo ln -s "${file}" /targetdir/${file}
+    cmd="ln -s "$PWD/${file}" ~/.local/bin/${file}"
+    echo $cmd
+    $cmd
 done

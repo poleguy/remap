@@ -7,8 +7,9 @@ set -e
 # if python-fire window is open, switch to it
 # https://superuser.com/questions/142945/bash-command-to-focus-a-specific-window
 
-WINDOW_STR="Microsoft Teams"
+WINDOW_STR="| Microsoft Teams"
 
+# this may match with the wrong window if a tab in firefox for example has the words MicrosoftTeams in it. It even seems to ignore the space, so I added the |
 #todo: this has a bug that it will open another copy of chrome teams if the tab isn't active in the already open teams
 
 # if window is open but not active, switch to it.
@@ -31,6 +32,6 @@ RC=$?
 # https://stackoverflow.com/questions/26675681/how-to-check-the-exit-status-using-an-if-statement
 if [[ "${RC}" == 1 ]]; then
     echo "starting teams"
-    google-chrome https://teams.microsoft.com
+    google-chrome --app=https://teams.microsoft.com --remote-debugging-port=9222 --remote-allow-origins=http://localhost:9222
 fi
 

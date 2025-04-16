@@ -13,7 +13,7 @@ WINDOW_STR="OBS "
 NAME=$(xdotool getwindowfocus getwindowname)
 
 # look for substring match
-if [[ "$NAME" == *"$WINDOW_STR"* ]]; then
+if [[ "$NAME" == "$WINDOW_STR"* ]]; then
     wmctrl -a $WINDOW_STR -b add,hidden && true
     #espeak "hiding"
 else
