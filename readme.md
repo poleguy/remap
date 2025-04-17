@@ -16,6 +16,7 @@ https://www.amazon.com/Elgato-Stream-Deck-MK-2-Controller/dp/B09738CV2G/
 
 But with 40% more buttons and 10% of the price.
 
+It's great. I have one button dedicated to pulling up python that I use as a calculator; one pulls up Teams (which is often lost under other windows); one pulls up the macro code so I can edit it on the fly without restarting; one pulls up obs; several switch camera views. You can also just map it to send keystrokes, or play audio, or whatever your imagination allows.
 
 
 ## Prerequisites:
