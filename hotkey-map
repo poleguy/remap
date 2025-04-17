@@ -6,6 +6,9 @@
 import subprocess
 import os
 import time
+import pyautogui
+
+     
 
 # https://python-evdev.readthedocs.io/en/latest/tutorial.html
 
@@ -96,6 +99,7 @@ def main(keycode):
         #subprocess.Popen("amixer set 'Front-Panel',0 nocap; amixer set 'Rear-Panel',0 nocap", shell=True)
         # mute teams    
         subprocess.Popen("/home/poleguy/.local/bin/hotkey-teams-toggle-mute")
+        #pyautogui.write('Hello world!', interval=0.005)  #
     if keycode == 'KEY_KP8':
         subprocess.Popen(f'obs-cli -p {OBS_WEBSOCKET_PASSWORD} -P 4455 -H 192.168.1.162 filter toggle teleprompter Freeze', shell=True, env=os.environ)
 

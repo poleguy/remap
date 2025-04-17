@@ -1,0 +1,27 @@
+# put in
+# sudo cp remap.service /etc/systemd/system/
+# poleguy@elgar:~/flippy-data/2023/remap$ sudo systemctl daemon-reload 
+# poleguy@elgar:~/flippy-data/2023/remap$ sudo systemctl start remap.service
+# https://unix.stackexchange.com/questions/537628/error-cannot-open-display-on-systemd-service-which-needs-graphical-interface
+
+# service runs but still not working. can't talk to display?
+# https://stackoverflow.com/questions/65885186/systemd-run-script-after-wakeup-cant-open-display
+
+
+
+[Unit]
+Description=Remap Macro Keypad
+After=network.target
+
+[Service]
+Type=simple
+User=poleguy
+ExecStart=/home/poleguy/flippy-data/2023/remap/remap
+Restart=always  
+Environment="DISPLAY=:0"
+Environment="XAUTHORITY=/home/poleguy/.Xauthority"
+
+[Install]
+WantedBy=multi-user.target
+
+#WantedBy=xsession.target

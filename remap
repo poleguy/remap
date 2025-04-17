@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# see install instructions in remap.service
+set -e
+whoami
+# necessary to work under systemd
+export DISPLAY=:0
+export XAUTHORITY=/home/poleguy/.Xauthority
+env
+cd /home/poleguy/flippy-data/2023/remap
+source scripts/activate_python
+which python
+# quiet the log
+python remap.py >& /dev/null
