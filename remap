@@ -11,3 +11,5 @@ source scripts/activate_python
 which python
 # quiet the log
 python remap.py >& /dev/null
+# use for debug:
+#python remap.py 
