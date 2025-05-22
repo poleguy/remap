@@ -2,7 +2,10 @@
 
 "Merry Christmas Damian."
 
-This little script is a bit hacky, but it works nicely.
+A $16.82 macro keyboard for linux.
+
+![numeric keypad sideways on a desk](remap.jpg)
+
 
 ## What is this?
 

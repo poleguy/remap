@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
-# open teams
+# open krita and maximize (expected to be always on tablet, so minimize toggle isn't needed)
 
+#set -x
 set -e
 
-WINDOW_STR="OBS Studio"
-WM_CLASS="obs.obs"
+# if window is open, switch to it
+# https://superuser.com/questions/142945/bash-command-to-focus-a-specific-window
+
+WINDOW_STR="Krita"
+WM_CLASS="krita.krita"
+
+# this may match with the wrong window if a tab in firefox for example has the words MicrosoftTeams in it. It even seems to ignore the space at the start.
+
 
 # if window is open but not active, switch to it.
 # otherwise minimize it
@@ -20,25 +27,20 @@ WINDOW_ID=$(wmctrl -xl | tr -s ' ' | cut -d ' ' -f 1,3 | grep $WM_CLASS | cut -d
 
 # check if window we're looking for is already active
 # look for substring match
-# this unfortunately will match on chrome windows if you google search a matching string.
-
-# this only matches at the start of the window string
-if [[ "$NAME" == "$WINDOW_STR"* ]]; then
-    wmctrl -i -a $WINDOW_ID -b add,hidden && true
-    RC=$?
-    #espeak "hiding"
-    echo hiding
-else
+#if [[ "$NAME" == *"$WINDOW_STR"* ]]; then
+#    wmctrl -i -a $WINDOW_ID -b add,hidden && true
+#    #espeak "hiding"
+#    echo hiding
+#else
     wmctrl -i -a $WINDOW_ID && true
     RC=$?
     #espeak "restoring"
-    echo restoring
-fi
-
+	echo restoring
+#fi
 
 # https://stackoverflow.com/questions/26675681/how-to-check-the-exit-status-using-an-if-statement
 if [[ "${RC}" == 1 ]]; then
-    echo "starting obs"
-    obs
+    echo "starting krita"
+    /home/poleguy/Applications/krita-5.2.6-x86_64_b91deea105204592bed527d811426f67.appimage
 fi
 
