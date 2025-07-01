@@ -8,9 +8,14 @@ set -e
 # https://superuser.com/questions/142945/bash-command-to-focus-a-specific-window
 
 WINDOW_STR="| Microsoft Teams"
+WM_CLASS="teams.microsoft.com.Google-chrome"
+
+# we use WM_CLASS as well as WINDOW_STR to avoid matching on random website title text
+
 
 # this may match with the wrong window if a tab in firefox for example has the words MicrosoftTeams in it. It even seems to ignore the space, so I added the |
 #todo: this has a bug that it will open another copy of chrome teams if the tab isn't active in the already open teams
+# fixed by only running teams in chrome and nothing else.
 
 # if window is open but not active, switch to it.
 # otherwise minimize it
@@ -19,19 +24,37 @@ WINDOW_STR="| Microsoft Teams"
 
 NAME=$(xdotool getwindowfocus getwindowname)
 
+# first find window id
+# https://unix.stackexchange.com/questions/109835/how-do-i-use-cut-to-separate-by-multiple-whitespace
+WINDOW_ID=$(wmctrl -xl | grep "$WINDOW_STR" | tr -s ' ' | cut -d ' ' -f 1,3 | grep $WM_CLASS | cut -d ' ' -f 1)
+
+#echo $NAME >> /tmp/blah.txt
+#echo $WINDOW_STR >> /tmp/blah.txt
+RC=0
 # look for substring match
 if [[ "$NAME" == *"$WINDOW_STR"* ]]; then
-    wmctrl -a $WINDOW_STR -b add,hidden && true
+    wmctrl -i -a "$WINDOW_ID" -b add,hidden || RC=$?
     #espeak "hiding"
 else
-    wmctrl -a $WINDOW_STR && true
-    #espeak "restoring"
+    wmctrl -i -a "$WINDOW_ID" || RC=$?
+    #espeak "restoring $RC"
 fi
-RC=$?
+
 
 # https://stackoverflow.com/questions/26675681/how-to-check-the-exit-status-using-an-if-statement
 if [[ "${RC}" == 1 ]]; then
     echo "starting teams"
-    google-chrome --app=https://teams.microsoft.com --remote-debugging-port=9222 --remote-allow-origins=http://localhost:9222
+    # https://developer.chrome.com/blog/remote-debugging-port
+    # https://code.visualstudio.com/docs/nodejs/browser-debugging#_attaching-to-browsers
+    # adding --user-data-dir automatically creates an alternate profile
+
+    # note this data-dir directory will show up relative to the remap directory
+    # if you need to install plugins (e.g. open in firefox) they will need to be copied to this profile:
+    # cp ~/.config/google-chrom/NativeMessagingHosts/com.add0n.node.json ~/flippy-data/2023/remap/remote-debug-profile/NativeMessagingHosts/
+
+    # Error fetching debugger URL: HTTPConnectionPool(host='localhost', port=9222): Max retries exceeded with url: /json (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x783ac4d0f950>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+    #espeak "trying"
+    google-chrome --app=https://teams.microsoft.com --remote-debugging-port=9222 --remote-allow-origins=http://localhost:9222 --user-data-dir=/home/poleguy/flippy-data/2023/remap/remote-debug-profile
 fi
 

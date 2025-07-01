@@ -6,6 +6,9 @@ set -e
 WINDOW_STR="OBS Studio"
 WM_CLASS="obs.obs"
 
+# we use WM_CLASS as well as WINDOW_STR to avoid matching on random website title text
+
+
 # if window is open but not active, switch to it.
 # otherwise minimize it
 # https://superuser.com/questions/142945/bash-command-to-focus-a-specific-window
@@ -15,24 +18,20 @@ NAME=$(xdotool getwindowfocus getwindowname)
 
 # first find window id
 # https://unix.stackexchange.com/questions/109835/how-do-i-use-cut-to-separate-by-multiple-whitespace
-WINDOW_ID=$(wmctrl -xl | tr -s ' ' | cut -d ' ' -f 1,3 | grep $WM_CLASS | cut -d ' ' -f 1)
+WINDOW_ID=$(wmctrl -xl | grep "$WINDOW_STR" | tr -s ' ' | cut -d ' ' -f 1,3 | grep $WM_CLASS | cut -d ' ' -f 1)
 
 
 # check if window we're looking for is already active
 # look for substring match
 # this unfortunately will match on chrome windows if you google search a matching string.
-
+RC=0
 # this only matches at the start of the window string
 if [[ "$NAME" == "$WINDOW_STR"* ]]; then
-    wmctrl -i -a $WINDOW_ID -b add,hidden && true
-    RC=$?
+    wmctrl -i -a "$WINDOW_ID" -b add,hidden || RC=$?
     #espeak "hiding"
-    echo hiding
 else
-    wmctrl -i -a $WINDOW_ID && true
-    RC=$?
+    wmctrl -i -a "$WINDOW_ID" || RC=$?
     #espeak "restoring"
-    echo restoring
 fi
 
 

@@ -7,9 +7,8 @@ import subprocess
 import errno
 import os
 # https://python-evdev.readthedocs.io/en/latest/tutorial.html
-
-dev =evdev.InputDevice('/dev/input/by-id/usb-0c45_USB_Keyboard-event-kbd')
-dev2 = evdev.InputDevice('/dev/input/by-id/usb-0c45_USB_Keyboard-event-if01')
+DEV_1 = '/dev/input/by-id/usb-0c45_USB_Keyboard-event-kbd'
+DEV_2 = '/dev/input/by-id/usb-0c45_USB_Keyboard-event-if01'
 
 # needed to do this in python to prevent glitch characters in terminal when using
 # input-remapper-gtk
@@ -21,12 +20,20 @@ def main():
         asyncio.run(async_main())
     except OSError as e:
         if e.errno == errno.ENODEV:
-            print("sleeping after seeing no device")
+            print("saw no device: sleeping so service doesn't give up")
             time.sleep(1)
         else:
             raise
 
 async def async_main():
+    try:
+        dev =evdev.InputDevice(DEV_1)
+        dev2 = evdev.InputDevice(DEV_2)
+    except FileNotFoundError as e:
+        print("Failed to open device: sleeping so service doesn't give up")
+        time.sleep(1)
+        return
+
     loop = asyncio.get_event_loop()
     with dev.grab_context():
         # to stop calculator functionality.

@@ -22,21 +22,14 @@ NAME=$(xdotool getwindowfocus getwindowname)
 
 # first find window id
 # https://unix.stackexchange.com/questions/109835/how-do-i-use-cut-to-separate-by-multiple-whitespace
-WINDOW_ID=$(wmctrl -xl | tr -s ' ' | cut -d ' ' -f 1,3 | grep $WM_CLASS | cut -d ' ' -f 1)
+WINDOW_ID=$(wmctrl -xl | grep "$WINDOW_STR" | tr -s ' ' | cut -d ' ' -f 1,3 | grep $WM_CLASS | cut -d ' ' -f 1)
 
 
+RC=0
 # check if window we're looking for is already active
 # look for substring match
-#if [[ "$NAME" == *"$WINDOW_STR"* ]]; then
-#    wmctrl -i -a $WINDOW_ID -b add,hidden && true
-#    #espeak "hiding"
-#    echo hiding
-#else
-    wmctrl -i -a $WINDOW_ID && true
-    RC=$?
-    #espeak "restoring"
-	echo restoring
-#fi
+wmctrl -i -a "$WINDOW_ID" || RC=$?
+#espeak "restoring"
 
 # https://stackoverflow.com/questions/26675681/how-to-check-the-exit-status-using-an-if-statement
 if [[ "${RC}" == 1 ]]; then

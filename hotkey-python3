@@ -3,6 +3,9 @@
 set -e
 
 WINDOW_STR="python-fire"
+WM_CLASS="xfce4-terminal.Xfce4-terminal"
+
+# we use WM_CLASS as well as WINDOW_STR to avoid matching on random website title text
 
 # if window is open but not active, switch to it.
 # otherwise minimize it
@@ -11,15 +14,21 @@ WINDOW_STR="python-fire"
 
 NAME=$(xdotool getwindowfocus getwindowname)
 
+# first find window id
+# https://unix.stackexchange.com/questions/109835/how-do-i-use-cut-to-separate-by-multiple-whitespace
+WINDOW_ID=$(wmctrl -xl | grep "$WINDOW_STR" | tr -s ' ' | cut -d ' ' -f 1,3 | grep $WM_CLASS | cut -d ' ' -f 1)
+
+#espeak "window id $WINDOW_ID"
+RC=0
 # look for substring match
 if [[ "$NAME" == *"$WINDOW_STR"* ]]; then
-    wmctrl -a $WINDOW_STR -b add,hidden && true
     #espeak "hiding"
+    wmctrl -i -a "$WINDOW_ID" -b add,hidden || RC=$?
 else
-    wmctrl -a $WINDOW_STR && true
     #espeak "restoring"
+    wmctrl -i -a "$WINDOW_ID" || RC=$?
 fi
-RC=$?
+#espeak "RC $RC"
 
 # https://stackoverflow.com/questions/26675681/how-to-check-the-exit-status-using-an-if-statement
 if [[ "${RC}" == 1 ]]; then

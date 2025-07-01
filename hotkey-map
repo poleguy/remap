@@ -19,7 +19,6 @@ def main(keycode):
     if keycode == 'KEY_ESC':
         bash_detached("/home/poleguy/.local/bin/hotkey-teams")
     if keycode == 'KEY_CALC':
-        print("Hello, world!")
         bash_detached("/home/poleguy/.local/bin/hotkey-python3")
     if keycode == 'KEY_TAB':
         bash_detached("/home/poleguy/.local/bin/hotkey-obs")
@@ -47,12 +46,14 @@ def main(keycode):
         #bash_detached('xdg-open /home/poleguy/fpga-data/2024/nullboard/nullboard.html')
         bash_detached('espeak "Undefined. Press edit key to define."')
     if keycode == 'KEY_KP6':
-        bash_detached('espeak "Resetting tablet pen mapping."')
-        bash_detached('xinput --map-to-output "Tablet Monitor Pen Pen (0)" DP-3')
+        #bash_detached('espeak "Resetting tablet pen mapping."')
+        #bash_detached('xinput --map-to-output "Tablet Monitor Pen Pen (0)" DP-3')
+        bash_detached('xinput --map-to-output "Tablet Monitor Pen stylus" DP-3')
         bash_detached("/home/poleguy/flippy-data/2023/remap/hotkey-krita")
         # move stuff off of tablet, except Krita
         bash_detached('python3 /home/poleguy/flippy-data/sweep/move_windows/move_windows.py')
-        pass
+        # try to reset black screen as well
+        bash_detached('obs-cli -p mrnSTlSSX1xl5aBD -P 4455 -H 192.168.1.162 input set teleprompter  "Exposure Time, Absolute" 750')
     if keycode == 'KEY_KP7':
         # mute
         #bash_detached("amixer set 'Front-Panel',0 nocap; amixer set 'Rear-Panel',0 nocap")
@@ -64,9 +65,16 @@ def main(keycode):
         bash_detached(f'obs-cli -p {OBS_WEBSOCKET_PASSWORD} -P 4455 -H 192.168.1.162 filter toggle teleprompter Freeze')
 
     if keycode == 'KEY_KP9':
-        bash_detached('xrandr --output HDMI-0 --mode 2560x1440 --pos 2560x0 --rate 60.00')
-        time.sleep(16)
-        bash_detached('xrandr --output HDMI-0 --mode 3840x2160 --pos 2560x0 --rate 60.00')
+        #bash_detached('xrandr --output HDMI-0 --mode 2560x1440 --pos 2560x0 --rate 60.00')
+        #time.sleep(16)
+        # left
+        bash_detached('xrandr --output DP-0 --mode 2560x1440 --pos 0x0 --rate 59.94')
+        # right
+        #bash_detached('xrandr --output HDMI-0 --mode 3840x2160 --pos 2560x0 --rate 60.00')
+        bash_detached('xrandr --output HDMI-0 --mode 3840x2160 --pos 2560x0 --display :0.0')
+        #bash_detached('xrandr --output HDMI-0 --mode 2560x1440 --pos 2560x0 --display :0.0')        
+        # tablet
+        bash_detached('xrandr --output DP-3 --mode 1920x1080 --pos 3520x2160 --rate 60.00')
 
         
         # try to reset black screen as well
@@ -74,7 +82,7 @@ def main(keycode):
         
         # fix tablet:
         
-        bash_detached('xinput --map-to-output "Tablet Monitor Pen stylus" DP-3')
+        #bash_detached('xinput --map-to-output "Tablet Monitor Pen stylus" DP-3')
 
         # move stuff off of tablet, except Krita
         bash_detached('python3 /home/poleguy/flippy-data/sweep/move_windows/move_windows.py')
