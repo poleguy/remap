@@ -20,8 +20,11 @@ ExecStart=/home/poleguy/flippy-data/2023/remap/remap
 Restart=always  
 Environment="DISPLAY=:0"
 Environment="XAUTHORITY=/home/poleguy/.Xauthority"
+Environment="DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
+Environment="XDG_RUNTIME_DIR=/run/user/1000"
 
 [Install]
-WantedBy=multi-user.target
+#WantedBy=multi-user.target # doesn't start at boot?
+WantedBy=graphical.target
 
 #WantedBy=xsession.target

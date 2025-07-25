@@ -70,8 +70,10 @@ def main(keycode):
         # left
         bash_detached('xrandr --output DP-0 --mode 2560x1440 --pos 0x0 --rate 59.94')
         # right
-        #bash_detached('xrandr --output HDMI-0 --mode 3840x2160 --pos 2560x0 --rate 60.00')
-        bash_detached('xrandr --output HDMI-0 --mode 3840x2160 --pos 2560x0 --display :0.0')
+        bash_detached('xrandr --output HDMI-0 --mode 3840x2160 --pos 2560x0 --rate 60.00')
+#        bash_detached('xrandr --output HDMI-0 --mode 3840x2160 --pos 2560x0 --rate 25.00')
+
+        #bash_detached('xrandr --output HDMI-0 --mode 3840x2160 --pos 2560x0 --display :0.0')
         #bash_detached('xrandr --output HDMI-0 --mode 2560x1440 --pos 2560x0 --display :0.0')        
         # tablet
         bash_detached('xrandr --output DP-3 --mode 1920x1080 --pos 3520x2160 --rate 60.00')
